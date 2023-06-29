@@ -5,11 +5,8 @@ FROM $BASE_IMAGE as runtime-environment
 RUN apt-get update && apt-get install -y build-essential
 
 # install project requirements
-#COPY src/requirements.txt /tmp/requirements.txt
-#RUN pip install --no-cache -r /tmp/requirements.txt && rm -f /tmp/requirements.txt && pip install -U kedro-viz
-
-COPY pyproject.toml /pyproject.toml
-RUN pip install poetry && poetry install && rm -f /pyproject.toml
+COPY src/requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
 
 # add kedro user
 ARG KEDRO_UID=999
